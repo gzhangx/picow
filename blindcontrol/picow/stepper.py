@@ -6,22 +6,24 @@ import utime
 def mapPins(pin):
     return Pin(pin, Pin.OUT)
     
-class Steper4:
-    def _init_(self, pins, delay = 0.001):
-        self.pins = map(pins, mapPins)
+class Steper4(object):
+    def __init__(self, pins, delay = 0.001):
+        print('test1')
+        self.pins = list(map(mapPins,pins))
+        print(pins)
+        print(self.pins)
         self.stepSequence = [
             [1,0,0,0],
             [0,1,0,0],
             [0,0,1,0],
             [0,0,0,1]
         ]
-        self.delay = delay;
+        self.delay = delay
         
         
-    def doStep(dir):
-        
-        ddf = (lambda a:a) if dir>0 else reversed;
+    def doStep(self):        
+        #ddf = (lambda a:a) if dir>0 else reversed;
         for step in self.stepSequence:
-            for i in ddf(range(len(self.pins))):
+            for i in reversed(range(len(self.pins))):
                 self.pins[i].value(step[i])
                 utime.sleep(self.delay)
