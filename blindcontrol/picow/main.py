@@ -22,10 +22,10 @@ import time
 
 led= machine.Pin('LED', machine.Pin.OUT)
 
-mot1 = stepper.Steper4([4,5,6,7])
+mot1 = stepper.Steper4([2,3,4,5], 0.002)
 while (True):
     led.on()
-    time.sleep(0.5)
+    #time.sleep(0.001)
     led.off()
-    time.sleep(0.5)
-    mot1.doStep()
+    #time.sleep(0.001)
+    mot1.doStep(1)

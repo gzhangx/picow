@@ -13,17 +13,17 @@ class Steper4(object):
         print(pins)
         print(self.pins)
         self.stepSequence = [
-            [1,0,0,0],
-            [0,1,0,0],
-            [0,0,1,0],
-            [0,0,0,1]
+            [1,0,1,0],
+            [0,1,1,0],
+            [0,1,0,1],
+            [1,0,0,1]
         ]
         self.delay = delay
         
         
-    def doStep(self):        
-        #ddf = (lambda a:a) if dir>0 else reversed;
+    def doStep(self, dir):        
+        ddf = (lambda a:a) if dir>0 else reversed;
         for step in self.stepSequence:
-            for i in reversed(range(len(self.pins))):
+            for i in ddf(range(len(self.pins))):
                 self.pins[i].value(step[i])
                 utime.sleep(self.delay)
